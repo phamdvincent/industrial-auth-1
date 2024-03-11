@@ -1,5 +1,13 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show liked feed followers following discover ]
+  
+  def index
+    authorize @user
+  end
+
+  def show
+    authorize @user
+  end
 
   private
 

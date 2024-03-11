@@ -6,13 +6,17 @@ class UserPolicy < ApplicationPolicy
     @user = user
   end
 
+  def index?
+    true
+  end
+
   def feed?
     true
   end
   
   def show?
     user == current_user ||
-     !user.private? || 
-     user.followers.include?(current_user)
+    !user.private? || 
+    user.followers.include?(current_user)
   end
 end
