@@ -3,11 +3,9 @@ class UsersController < ApplicationController
   before_action {authorize @user}
   
   def index
-    authorize @user
   end
 
   def show
-    authorize @user
   end
 
   private
