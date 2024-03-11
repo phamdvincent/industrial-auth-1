@@ -19,7 +19,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show_user_feed?
-    !user.private? || user.followers.include?(current_user)
+    @user == current_user || !user.private? || user.followers.include?(current_user)
   end
   
   def show?
