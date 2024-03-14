@@ -1,23 +1,15 @@
 class PhotosController < ApplicationController
   before_action :set_photo, only: %i[ show edit update destroy ]
-  before_action :ensure_current_user_is_owner, only: [:destroy, :update, :edit]
+  before_action {authorize @photo || Photo}
 
   # GET /photos or /photos.json
   def index
     @photos = Photo.all
   end
 
-  # GET /photos/1 or /photos/1.json
-  def show
-  end
-
   # GET /photos/new
   def new
     @photo = Photo.new
-  end
-
-  # GET /photos/1/edit
-  def edit
   end
 
   # POST /photos or /photos.json
@@ -63,12 +55,6 @@ class PhotosController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_photo
     @photo = Photo.find(params[:id])
-  end
-
-  def ensure_current_user_is_owner
-    if current_user != @photo.owner
-      redirect_back fallback_location: root_url, alert: "You're not authorized for that."
-    end
   end
 
   # Only allow a list of trusted parameters through.
