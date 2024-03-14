@@ -6,15 +6,17 @@ class CommentPolicy < ApplicationPolicy
     @comment = comment
   end
 
-  def show?
-    user == comment.author
-  end
-
   def destroy?
-    user == comment.author
+    is_author?
   end
 
   def edit?
+    is_author?
+  end
+
+  private
+
+  def is_author?
     user == comment.author
   end
 end

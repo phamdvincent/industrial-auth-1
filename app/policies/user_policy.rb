@@ -18,6 +18,10 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
+  def discover?
+    true
+  end
+
   def show_user_feed?
     @user == current_user || !user.private? || user.followers.include?(current_user)
   end
